@@ -38,7 +38,7 @@ const versionDiv = document.getElementById('version');
 versionDiv.innerHTML = package.version;
 
 const configFile = require('os').homedir() + '/RoC-Launcher.json';
-var config = {folder: 'C:\\SWGRelics'};
+var config = {folder: 'C:\\SWG-Starforge'};
 if (fs.existsSync(configFile))
     config = JSON.parse(fs.readFileSync(configFile));
 folderBox.value = config.folder;
@@ -94,7 +94,9 @@ playBtn.addEventListener('click', event => {
 
 profcalcBtn.addEventListener('click', function (event) {
     ipc.send('open-profcalc');
+    
 });
+
 
 function play() {
     fs.writeFileSync(path.join(config.folder, "swgemu_login.cfg"), `[ClientGame]\r\nloginServerAddress0=${server.address}\r\nloginServerPort0=${server.port}\r\nfreeChaseCameraMaximumZoom=${config.zoom}`);
@@ -131,8 +133,8 @@ home.addEventListener('click', event => {
     settings.className = "button";
 });
 
-websiteBtn.addEventListener('click', event => shell.openExternal("http://relicsofcorbantis.com/"));
-discordBtn.addEventListener('click', event => shell.openExternal("https://discordapp.com/channels/126343966848188417/289458004745650176"));
+websiteBtn.addEventListener('click', event => shell.openExternal("http://swgemu.com/"));
+discordBtn.addEventListener('click', event => shell.openExternal("https://discord.com/channels/997945035876216922/1002699864615956600"));
 
 browseBtn.addEventListener('click', function (event) {
     ipc.send('open-directory-dialog', 'selected-directory');
@@ -336,6 +338,6 @@ function removeHeader(webview) {
     }
 }
 news.addEventListener("dom-ready", removeHeader(news));
-updates.addEventListener("dom-ready", removeHeader(updates));
+//updates.addEventListener("dom-ready", removeHeader(updates));
 
 versionDiv.addEventListener('click', event => remote.getCurrentWebContents().openDevTools());

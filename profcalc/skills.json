@@ -1985,7 +1985,7 @@
                     "name": "force_sensitive_enhanced_reflexes_ranged_defense_01",
                     "xp_type": "fs_reflex",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "ranged_defense": 5
@@ -1998,7 +1998,7 @@
                     "name": "force_sensitive_enhanced_reflexes_ranged_defense_02",
                     "xp_type": "fs_reflex",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "ranged_defense": 5
@@ -2011,7 +2011,7 @@
                     "name": "force_sensitive_enhanced_reflexes_ranged_defense_03",
                     "xp_type": "fs_reflex",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "ranged_defense": 5
@@ -2024,7 +2024,7 @@
                     "name": "force_sensitive_enhanced_reflexes_ranged_defense_04",
                     "xp_type": "fs_reflex",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "ranged_defense": 5
@@ -2039,7 +2039,7 @@
                     "name": "force_sensitive_enhanced_reflexes_melee_defense_01",
                     "xp_type": "fs_reflex",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "melee_defense": 5
@@ -2052,7 +2052,7 @@
                     "name": "force_sensitive_enhanced_reflexes_melee_defense_02",
                     "xp_type": "fs_reflex",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "melee_defense": 5
@@ -2065,7 +2065,7 @@
                     "name": "force_sensitive_enhanced_reflexes_melee_defense_03",
                     "xp_type": "fs_reflex",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "melee_defense": 5
@@ -2078,7 +2078,7 @@
                     "name": "force_sensitive_enhanced_reflexes_melee_defense_04",
                     "xp_type": "fs_reflex",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "melee_defense": 5
@@ -2093,7 +2093,7 @@
                     "name": "force_sensitive_enhanced_reflexes_vehicle_control_01",
                     "xp_type": "fs_reflex",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_vehicle_control": 5
@@ -2106,7 +2106,7 @@
                     "name": "force_sensitive_enhanced_reflexes_vehicle_control_02",
                     "xp_type": "fs_reflex",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_vehicle_speed": 1,
@@ -2120,7 +2120,7 @@
                     "name": "force_sensitive_enhanced_reflexes_vehicle_control_03",
                     "xp_type": "fs_reflex",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_vehicle_speed": 1,
@@ -2134,7 +2134,7 @@
                     "name": "force_sensitive_enhanced_reflexes_vehicle_control_04",
                     "xp_type": "fs_reflex",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_vehicle_speed": 1,
@@ -2150,7 +2150,7 @@
                     "name": "force_sensitive_enhanced_reflexes_survival_01",
                     "xp_type": "fs_reflex",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "foraging": 5,
@@ -2164,7 +2164,7 @@
                     "name": "force_sensitive_enhanced_reflexes_survival_02",
                     "xp_type": "fs_reflex",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "trapping": 5,
@@ -2178,7 +2178,7 @@
                     "name": "force_sensitive_enhanced_reflexes_survival_03",
                     "xp_type": "fs_reflex",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "slope_move": 5
@@ -2191,7 +2191,7 @@
                     "name": "force_sensitive_enhanced_reflexes_survival_04",
                     "xp_type": "fs_reflex",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "creature_harvesting": 5,
@@ -3116,7 +3116,7 @@
                     "name": "force_sensitive_combat_prowess_ranged_accuracy_01",
                     "xp_type": "fs_combat",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "ranged_accuracy": 3
@@ -3129,7 +3129,7 @@
                     "name": "force_sensitive_combat_prowess_ranged_accuracy_02",
                     "xp_type": "fs_combat",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "ranged_accuracy": 3
@@ -3142,7 +3142,7 @@
                     "name": "force_sensitive_combat_prowess_ranged_accuracy_03",
                     "xp_type": "fs_combat",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "ranged_accuracy": 3
@@ -3155,7 +3155,7 @@
                     "name": "force_sensitive_combat_prowess_ranged_accuracy_04",
                     "xp_type": "fs_combat",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "ranged_accuracy": 3
@@ -3170,7 +3170,7 @@
                     "name": "force_sensitive_combat_prowess_ranged_speed_01",
                     "xp_type": "fs_combat",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "ranged_speed": 3
@@ -3183,7 +3183,7 @@
                     "name": "force_sensitive_combat_prowess_ranged_speed_02",
                     "xp_type": "fs_combat",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "ranged_speed": 3
@@ -3196,7 +3196,7 @@
                     "name": "force_sensitive_combat_prowess_ranged_speed_03",
                     "xp_type": "fs_combat",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "ranged_speed": 3
@@ -3209,7 +3209,7 @@
                     "name": "force_sensitive_combat_prowess_ranged_speed_04",
                     "xp_type": "fs_combat",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "ranged_speed": 3
@@ -3224,7 +3224,7 @@
                     "name": "force_sensitive_combat_prowess_melee_accuracy_01",
                     "xp_type": "fs_combat",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "melee_accuracy": 3
@@ -3237,7 +3237,7 @@
                     "name": "force_sensitive_combat_prowess_melee_accuracy_02",
                     "xp_type": "fs_combat",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "melee_accuracy": 3
@@ -3250,7 +3250,7 @@
                     "name": "force_sensitive_combat_prowess_melee_accuracy_03",
                     "xp_type": "fs_combat",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "melee_accuracy": 3
@@ -3263,7 +3263,7 @@
                     "name": "force_sensitive_combat_prowess_melee_accuracy_04",
                     "xp_type": "fs_combat",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "melee_accuracy": 3
@@ -3278,7 +3278,7 @@
                     "name": "force_sensitive_combat_prowess_melee_speed_01",
                     "xp_type": "fs_combat",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "melee_speed": 3
@@ -3291,7 +3291,7 @@
                     "name": "force_sensitive_combat_prowess_melee_speed_02",
                     "xp_type": "fs_combat",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "melee_speed": 3
@@ -3304,7 +3304,7 @@
                     "name": "force_sensitive_combat_prowess_melee_speed_03",
                     "xp_type": "fs_combat",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "melee_speed": 3
@@ -3317,7 +3317,7 @@
                     "name": "force_sensitive_combat_prowess_melee_speed_04",
                     "xp_type": "fs_combat",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "melee_speed": 3
@@ -4920,7 +4920,7 @@
                     "name": "force_sensitive_heightened_senses_healing_01",
                     "xp_type": "fs_senses",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "healing_music_wound": 5,
@@ -4935,7 +4935,7 @@
                     "name": "force_sensitive_heightened_senses_healing_02",
                     "xp_type": "fs_senses",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "healing_music_wound": 5,
@@ -4950,7 +4950,7 @@
                     "name": "force_sensitive_heightened_senses_healing_03",
                     "xp_type": "fs_senses",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "healing_music_wound": 5,
@@ -4965,7 +4965,7 @@
                     "name": "force_sensitive_heightened_senses_healing_04",
                     "xp_type": "fs_senses",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "healing_music_wound": 5,
@@ -4982,7 +4982,7 @@
                     "name": "force_sensitive_heightened_senses_surveying_01",
                     "xp_type": "fs_senses",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "surveying": 5
@@ -4995,7 +4995,7 @@
                     "name": "force_sensitive_heightened_senses_surveying_02",
                     "xp_type": "fs_senses",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "surveying": 5
@@ -5008,7 +5008,7 @@
                     "name": "force_sensitive_heightened_senses_surveying_03",
                     "xp_type": "fs_senses",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "surveying": 5
@@ -5021,7 +5021,7 @@
                     "name": "force_sensitive_heightened_senses_surveying_04",
                     "xp_type": "fs_senses",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "surveying": 5
@@ -5036,7 +5036,7 @@
                     "name": "force_sensitive_heightened_senses_persuasion_01",
                     "xp_type": "fs_senses",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_persuade": 5
@@ -5049,7 +5049,7 @@
                     "name": "force_sensitive_heightened_senses_persuasion_02",
                     "xp_type": "fs_senses",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_persuade": 5
@@ -5062,7 +5062,7 @@
                     "name": "force_sensitive_heightened_senses_persuasion_03",
                     "xp_type": "fs_senses",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_persuade": 5
@@ -5075,7 +5075,7 @@
                     "name": "force_sensitive_heightened_senses_persuasion_04",
                     "xp_type": "fs_senses",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_persuade": 5
@@ -5090,7 +5090,7 @@
                     "name": "force_sensitive_heightened_senses_luck_01",
                     "xp_type": "fs_senses",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_luck": 1
@@ -5103,7 +5103,7 @@
                     "name": "force_sensitive_heightened_senses_luck_02",
                     "xp_type": "fs_senses",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_luck": 1
@@ -5116,7 +5116,7 @@
                     "name": "force_sensitive_heightened_senses_luck_03",
                     "xp_type": "fs_senses",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_luck": 1
@@ -5129,7 +5129,7 @@
                     "name": "force_sensitive_heightened_senses_luck_04",
                     "xp_type": "fs_senses",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_luck": 1
@@ -5174,7 +5174,7 @@
                     "name": "force_sensitive_crafting_mastery_experimentation_01",
                     "xp_type": "fs_crafting",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_experimentation": 5
@@ -5187,7 +5187,7 @@
                     "name": "force_sensitive_crafting_mastery_experimentation_02",
                     "xp_type": "fs_crafting",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_experimentation": 5
@@ -5200,7 +5200,7 @@
                     "name": "force_sensitive_crafting_mastery_experimentation_03",
                     "xp_type": "fs_crafting",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_experimentation": 5
@@ -5213,7 +5213,7 @@
                     "name": "force_sensitive_crafting_mastery_experimentation_04",
                     "xp_type": "fs_crafting",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_experimentation": 5
@@ -5228,7 +5228,7 @@
                     "name": "force_sensitive_crafting_mastery_assembly_01",
                     "xp_type": "fs_crafting",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_assembly": 5
@@ -5241,7 +5241,7 @@
                     "name": "force_sensitive_crafting_mastery_assembly_02",
                     "xp_type": "fs_crafting",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_assembly": 5
@@ -5254,7 +5254,7 @@
                     "name": "force_sensitive_crafting_mastery_assembly_03",
                     "xp_type": "fs_crafting",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_assembly": 5
@@ -5267,7 +5267,7 @@
                     "name": "force_sensitive_crafting_mastery_assembly_04",
                     "xp_type": "fs_crafting",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_assembly": 5
@@ -5282,7 +5282,7 @@
                     "name": "force_sensitive_crafting_mastery_repair_01",
                     "xp_type": "fs_crafting",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_repair_bonus": 5
@@ -5295,7 +5295,7 @@
                     "name": "force_sensitive_crafting_mastery_repair_02",
                     "xp_type": "fs_crafting",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_repair_bonus": 5
@@ -5308,7 +5308,7 @@
                     "name": "force_sensitive_crafting_mastery_repair_03",
                     "xp_type": "fs_crafting",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_repair_bonus": 5
@@ -5321,7 +5321,7 @@
                     "name": "force_sensitive_crafting_mastery_repair_04",
                     "xp_type": "fs_crafting",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_repair_bonus": 5
@@ -5336,7 +5336,7 @@
                     "name": "force_sensitive_crafting_mastery_technique_01",
                     "xp_type": "fs_crafting",
                     "xp_cost": 175000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_failure_reduction": 1
@@ -5349,7 +5349,7 @@
                     "name": "force_sensitive_crafting_mastery_technique_02",
                     "xp_type": "fs_crafting",
                     "xp_cost": 250000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_failure_reduction": 1
@@ -5362,7 +5362,7 @@
                     "name": "force_sensitive_crafting_mastery_technique_03",
                     "xp_type": "fs_crafting",
                     "xp_cost": 350000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_failure_reduction": 1
@@ -5375,7 +5375,7 @@
                     "name": "force_sensitive_crafting_mastery_technique_04",
                     "xp_type": "fs_crafting",
                     "xp_cost": 450000,
-                    "skillpoint_cost": 1,
+                    "skillpoint_cost": 0,
                     "credit_cost": "0",
                     "mods": {
                         "force_failure_reduction": 1

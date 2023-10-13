@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Relics of Corbantis Launcher</title>
+    <title>SWG: Starforge Launcher</title>
     <style>
       .button {
         position: absolute;
@@ -33,7 +33,7 @@
       }
       .right {
         font: 24px Arial;
-        color: #cc9966;
+        color: #000000;
         position: absolute;
         width: 100%;
         text-align: center;
@@ -102,7 +102,7 @@
       #profcalc { background:url(./img/profcalcbutton.png) no-repeat; }
       #profcalc:hover { background:url(./img/profcalcbuttonhov.png) no-repeat; }
       #profcalc:active { background:url(./img/profcalcbuttonclick.png) no-repeat; }
-      #profcalc:disabled { background:url(./img/profcalcbuttondis.png) no-repeat; }
+      #profcalc.disabled { background:url(./img/profcalcbuttondis.png) no-repeat; }
 
       #web { background:url(./img/webbutton.png) no-repeat; }
       #web:hover { background:url(./img/webbuttonhov.png) no-repeat; }
@@ -134,16 +134,12 @@
     </div>
     <div id="rightcontent" class="rightbox">
       <div class="right" style="top: 12px;">Latest News</div>
-      <div class="webview-wrapper right shadow" style="top:48px;height: calc(48% - 48px)">
-        <webview id="news" style="width:100%;height:100%" src="http://relicsofcorbantis.com/blog/"></webview>
-      </div>
-      <div class="right" style="top: calc(50% + 12px);">Updates</div>
-      <div class="webview-wrapper right shadow" style="top: calc(50% + 48px); height:calc(48% - 48px)">
-        <webview id="updates" style="width:100%;height:100%" src="http://relicsofcorbantis.com/updates-changes-at-relics/"></webview>
+      <div class="webview-wrapper right shadow" style="top:48px;height: calc(95% - 48px)">
+        <webview id="news" style="width:100%;height:100%" src="updates.html"></webview>
       </div>
     </div>
     <div id="rightsettings" class="rightbox" style="display:none">
-      <div class="right" style="top: 12px;">RoC Folder</div>
+      <div class="right" style="top: 12px;">Starforge Folder</div>
       <input id="folder" type="text" class="right shadow input" style="top: 48px;"/>
       <button id="browse" class="right shadow" style="top: 96px;">Browse</button>
       <button id="install" class="right shadow" style="top: 144px; width:38%;">Install From SWG</button>
@@ -176,7 +172,7 @@
       <button id="home" class="right button" style="bottom:12px"></button>
     </div>
 
-    <img class="header-img" src="./img/Relics-of-Corbantis-logo.png" style="position: absolute; left: 2%; top: 2%; width: 334px; -webkit-app-region: drag"/>
+    <img class="header-img" src="./img/starforge-logo.png" style="position: absolute; left: 2%; top: 2%; width: 334px; -webkit-app-region: drag"/>
     <button id="play" class="button" disabled style="top: 23%;"></button>
     <div id="progressbox" class="button shadow" style="top: 33%;height:24px; color: black; font-size: 16px; border: 3px solid #7b1b1d; border-radius: 8px; box-sizing: border-box; background-color: #627d9f">
       <div id="progress" style="width:0%;height:100%;background-color:#cc9966;border-radius:6px"></div>

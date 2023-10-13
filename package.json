@@ -1,16 +1,16 @@
 {
-  "name": "roc-launcher",
-  "version": "0.9.7",
-  "description": "Relics of Corbantis Official SWGEMU Launcher",
+  "name": "starforge-launcher",
+  "version": "0.1.9",
+  "description": "SWG: Starforge Official SWGEMU Launcher",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
     "build": "build --win --ia32 -p always"
   },
-  "repository": "https://github.com/dpwhittaker/roc-launcher",
-  "homepage": "http://relicsofcorbantis.com",
+  "repository": "https://github.com/mannax2012/StarforgeLauncher",
+  "homepage": "http://swgstarforge.com",
   "keywords": [
-    "relics of corbantis",
+    "starforge",
     "launcher",
     "installer",
     "swg",
@@ -21,7 +21,7 @@
     "emu",
     "swgemu"
   ],
-  "author": "Progor at Relics of Corbantis",
+  "author": "Progor at Relics of Corbantis, Continued by Mannax",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "~1.6.2",
@@ -37,7 +37,7 @@
     "request": "^2.81.0"
   },
   "build": {
-    "productName": "RoC Launcher",
+    "productName": "Starforge Launcher",
     "win": {
       "target": [
         "nsis",

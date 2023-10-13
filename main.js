@@ -2,6 +2,7 @@ const {app, BrowserWindow, ipcMain, dialog} = require('electron');
 const log = require('electron-log');
 const {autoUpdater} = require('electron-updater');
 const path = require('path');
+const fs = require('fs');
 const url = require('url');
 
 log.transports.file.file = require('os').homedir() + '/RoC-Launcher-log.txt';
@@ -40,6 +41,7 @@ ipcMain.on('open-profcalc', function() {
     pathname: path.join(__dirname, 'profcalc', 'index.html'),
     protocol: 'file:',
     slashes: true
+    
   }));
   if (require('electron-is-dev')) window.webContents.openDevTools();
 });
