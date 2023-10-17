@@ -89,6 +89,9 @@ playBtn.addEventListener('click', event => {
         })
     } else {
         play();
+        audioPlayer.pause();
+        muteButton.src = "img/muted.png";
+        isMuted = true;
     }
 });
 
