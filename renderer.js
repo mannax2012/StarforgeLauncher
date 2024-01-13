@@ -7,7 +7,7 @@ const server = require('./server');
 const package = require('./package');
 const install = require('./install');
 const path = require('path');
-
+const JSZip = require('jszip');
 const playBtn = document.getElementById('play');
 const settingsBtn = document.getElementById('settings');
 const profcalcBtn = document.getElementById('profcalc');
@@ -95,11 +95,38 @@ playBtn.addEventListener('click', event => {
     }
 });
 
-profcalcBtn.addEventListener('click', function (event) {
-    ipc.send('open-profcalc');
-    
+fs.readFile(path.join(config.folder, 'SWGProfCalc.zip'), (err, data) => {
+        if (err) {
+            console.error('Error reading SWGProfCalc.zip:', err);
+            return;
+        }
+
+        JSZip.loadAsync(data).then(zip => {
+            // Replace 'your-directory-path' with the directory where you want to unzip the files
+            return Promise.all(Object.keys(zip.files).map(file => {
+                return zip.files[file].async('nodebuffer').then(content => {
+                    // Replace 'your-directory-path' with the directory where you want to unzip the files
+                    fs.writeFileSync(path.join(config.folder, file), content);
+                });
+            }));
+        }).then(() => {
+            console.log('SWGProfCalc.zip successfully unzipped.');
+            profcalcBtn.disabled = false;
+        }).catch(error => {
+            console.error('Error unzipping SWGProfCalc.zip:', error);
+     });
 });
 
+
+fs.access(path.join(config.folder, 'KSWGProfCalcEditor.exe'), fs.constants.F_OK, (err) => {
+    if (!err) {
+        // File exists, enable the button
+        profcalcBtn.addEventListener('click', event => {
+            const child = process.spawn("cmd", ["/c", path.join(config.folder, "KSWGProfCalcEditor.exe")], {cwd: config.folder, detached: true, stdio: 'ignore'});
+            child.unref();
+        });
+    }
+});
 
 function play() {
     fs.writeFileSync(path.join(config.folder, "swgemu_login.cfg"), `[ClientGame]\r\nloginServerAddress0=${server.address}\r\nloginServerPort0=${server.port}\r\nfreeChaseCameraMaximumZoom=${config.zoom}`);
@@ -287,6 +314,7 @@ function disableAll() {
     installBtn.disabled = true;
     playBtn.disabled = true;
     browseBtn.disabled = true;
+    profcalcBtn.disabled = true;
     for (var child of modListBox.children) {
         child.children[0].disabled = true;
     }    

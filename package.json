@@ -1,6 +1,6 @@
 {
   "name": "starforge-launcher",
-  "version": "0.1.9",
+  "version": "0.2.1",
   "description": "SWG: Starforge Official SWGEMU Launcher",
   "main": "main.js",
   "scripts": {
@@ -33,6 +33,7 @@
     "electron-log": "^2.2.7",
     "electron-updater": "^2.4.5",
     "follow-redirects": "^1.2.4",
+    "jszip": "^3.10.1",
     "random-access-file": "^1.8.1",
     "request": "^2.81.0"
   },
