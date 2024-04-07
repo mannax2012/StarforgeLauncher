@@ -37,7 +37,7 @@ const gamesettingsBtn = document.getElementById('gamesettings');
 const versionDiv = document.getElementById('version');
 versionDiv.innerHTML = package.version;
 
-const configFile = require('os').homedir() + '/RoC-Launcher.json';
+const configFile = require('os').homedir() + '/Starforge-Launcher.json';
 var config = {folder: 'C:\\SWG-Starforge'};
 if (fs.existsSync(configFile))
     config = JSON.parse(fs.readFileSync(configFile));
@@ -163,7 +163,7 @@ home.addEventListener('click', event => {
     settings.className = "button";
 });
 
-websiteBtn.addEventListener('click', event => shell.openExternal("http://swgemu.com/"));
+websiteBtn.addEventListener('click', event => shell.openExternal("https://swgstarforge.wordpress.com/"));
 discordBtn.addEventListener('click', event => shell.openExternal("https://discord.com/channels/997945035876216922/1002699864615956600"));
 
 browseBtn.addEventListener('click', function (event) {

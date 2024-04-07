@@ -5,7 +5,7 @@ const path = require('path');
 const fs = require('fs');
 const url = require('url');
 
-log.transports.file.file = require('os').homedir() + '/RoC-Launcher-log.txt';
+log.transports.file.file = require('os').homedir() + '/Starforge-Launcher-log.txt';
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');

@@ -1,7 +1,7 @@
 {
   "name": "starforge-launcher",
-  "version": "0.2.1",
-  "description": "SWG: Starforge Official SWGEMU Launcher",
+  "version": "0.2.2",
+  "description": "SWG: Starforge Launcher",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
