@@ -164,7 +164,7 @@ home.addEventListener('click', event => {
 });
 
 websiteBtn.addEventListener('click', event => shell.openExternal("https://swgstarforge.wordpress.com/"));
-discordBtn.addEventListener('click', event => shell.openExternal("https://discord.com/channels/997945035876216922/1002699864615956600"));
+discordBtn.addEventListener('click', event => shell.openExternal("https://discord.gg/dyQsXQf9Vn"));
 
 browseBtn.addEventListener('click', function (event) {
     ipc.send('open-directory-dialog', 'selected-directory');

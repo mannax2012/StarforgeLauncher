@@ -9,8 +9,7 @@ module.exports.getManifest = function(mods, fullScan, emuPath, checkFiles) {
     if (fullScan || emuPath && !fs.existsSync(path.join(emuPath, "swgemu.cfg"))) {
         //force download with size:0, md5:""
         files = files.concat([
-            {name:"swgemu.cfg", size:0, md5:"", url:"http://www.launchpad2.net/SWGEmu/swgemu.cfg"},
-            {name:"swgemu_machineoptions.iff", size:0, md5:"", url:"http://www.launchpad2.net/SWGEmu/swgemu_machineoptions.iff"},
+            {name:"swgemu.cfg", size:0, md5:"", url:"https://www.dropbox.com/scl/fi/r3ux06gv3mqd7nd5tavxe/swgemu.cfg?rlkey=ns6picrx2kdeeknwaoln27qtf&dl=1"},
             {name:"swgemu_preload.cfg", size:0, md5:"", url:"http://www.launchpad2.net/SWGEmu/swgemu_preload.cfg"}
         ]);
     }
