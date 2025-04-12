@@ -94,13 +94,17 @@ namespace StarforgeLauncher.data
 
                     if (new Version(latest.Version) > new Version(LocalLaunchPadVersion))
                     {
-                        System.Windows.MessageBox.Show(
-                            $"Update available!\nRemote Version: {latest.Version}\nLocal Version: {LocalLaunchPadVersion}",
-                            "Update Available", MessageBoxButton.OK, MessageBoxImage.Information);
-                        setStatusText($"Update Found: V{latest.Version}");
+                       // System.Windows.MessageBox.Show($"Update available!\nRemote Version: {latest.Version}\nLocal Version: {LocalLaunchPadVersion}", "Update Available", MessageBoxButton.OK, MessageBoxImage.Information); setStatusText($"Update Found: V{latest.Version}");
                         await DownloadUpdate(latest.UpdateUrl);
-
+                        ConfigFileVariables.launchPadVersion = latest.Version;
+                        ConfigManager.SaveConfig();
                         return latest;
+                    } else
+                    {
+                        setStatusText("Starting LaunchPad.");
+                        await Task.Delay(2000);
+                        StartLaunchPad("StarforgeLaunchPad.exe");
+                        Application.Current.Shutdown();
                     }
                 }
             }
@@ -129,7 +133,7 @@ namespace StarforgeLauncher.data
         {
             setStatusText("Downloading update...");
             string tempPath = Path.Combine(Path.GetTempPath(), "Launcher_Update.zip");
-
+            await Task.Delay(1000); // Delay to ensure file locks are released
 
             // Initialize the HttpClientHandler with auto redirect enabled
             HttpClientHandler handler = new HttpClientHandler()
@@ -183,7 +187,7 @@ namespace StarforgeLauncher.data
 
                 Debug.WriteLine("Update applied.");
                 setStatusText("Update applied.");
-
+                await Task.Delay(1000);
                 // Now clean up the update folder
                 try
                 {

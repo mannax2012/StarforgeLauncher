@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
+	<ApplicationIcon>data\img\sf_icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -17,6 +18,8 @@
 
   <ItemGroup>
     <None Remove="data\img\launcher-background.jpg" />
+    <None Remove="data\img\launcherBackground.png" />
+    <None Remove="data\img\sf_icon.ico" />
     <None Remove="data\img\starforge-logo.png" />
   </ItemGroup>
 
@@ -26,6 +29,12 @@
 
   <ItemGroup>
     <Resource Include="data\img\launcher-background.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="data\img\launcherBackground.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="data\img\sf_icon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Resource>
     <Resource Include="data\img\starforge-logo.png">

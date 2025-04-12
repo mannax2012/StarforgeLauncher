@@ -12,30 +12,36 @@ namespace StarforgeLauncher.data
 
     public static class LauncherClientVariables
     {
-        public static string discord = "https://discord.gg/WaPv2hpKFq";
-        public static string website = "https://malevolentmultiverse.com";
+        public static string discord = "https://discord.gg/vgSPfNMXeN";
+        public static string website = "https://swgstarforge.com";
         public static string LaunchPadDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LaunchPad");
+        public static readonly string serverAddress = "172.23.248.241";
+        public static int serverPingPort = 44455;
+        public static string clientWebhostURL = "http://localhost/website/wordpress/launcher/starforge/client/";
+        public static string launcherWebhostURL = "http://localhost/website/wordpress/launcher/starforge/launcher/";
 
     }
     public static class ConfigFileVariables
     {
-        public static string serverAddress = "127.0.0.1";
-        public static  int serverPort = 44455;
         public static string launcherVersion = "0.0.1";
         public static string launchPadVersion = "0.0.1";
         public static string updaterVersion = "0.0.1";
         public static string InstallDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Starforge");
+        public static bool isInstalled = false;
+        public static bool isDirectorySet = false;
     }
 
     class ConfigManager
     {
-        private static readonly string ConfigFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.cfg");
+        private static readonly string ConfigFilePath = Path.Combine(LauncherClientVariables.LaunchPadDirectory, "config.cfg");
 
-        public static void InitializeConfig()
+        public static async Task InitializeConfig()
         {
             if (!System.IO.File.Exists(ConfigFilePath))
             { 
-                SaveConfig(); // Create new file with default values
+                SaveConfig();
+                await Task.Delay(1000);
+                LoadConfig();
             }
             else
             {

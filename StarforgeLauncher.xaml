@@ -11,23 +11,17 @@
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Background="DarkGray">
+        Icon="data/img/sf_icon.ico"
+        Background="Transparent">
     <Border x:Name="MainBorder" CornerRadius="10" Padding="0">
         <Border.Background>
-            <ImageBrush ImageSource="pack://application:,,,/data/img/launcher-background.jpg"
+            <ImageBrush ImageSource="pack://application:,,,/data/img/launcherBackground.png"
                     Stretch="Fill"
                     AlignmentX="Center"
                     AlignmentY="Center"/>
         </Border.Background>
         <Grid>
-            <Viewbox Stretch="Fill">
-                <Grid Margin="0,0,0,10">
-                    <Image Source="pack://application:,,,/data/img/starforge-logo.png"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"/>
-                </Grid>
-            </Viewbox>
-            <TextBlock x:Name="StatusTextBlock" HorizontalAlignment="Center" Margin="0,215,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" Width="366" TextAlignment="Center" Height="26" FontSize="18" Foreground="White"/>
+            <TextBlock x:Name="StatusTextBlock"  HorizontalAlignment="Center" Margin="0,185,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" Width="366" TextAlignment="Center" Height="26" FontSize="18" Foreground="White"/>
         </Grid>
     </Border>
 </Window>

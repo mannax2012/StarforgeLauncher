@@ -27,16 +27,12 @@ namespace StarforgeLauncher
 
         public void OnAppStart()
         {
-
+            ConfigManager.InitializeConfig();
             if (!Directory.Exists(LauncherClientVariables.LaunchPadDirectory))
             {
                 Directory.CreateDirectory(LauncherClientVariables.LaunchPadDirectory);
             }
 
-            if (!Directory.Exists(ConfigFileVariables.InstallDirectory))
-            {
-                Directory.CreateDirectory(ConfigFileVariables.InstallDirectory);
-            }
             UpdaterCheck();
             LaunchPadCheck();
         }
@@ -58,10 +54,6 @@ namespace StarforgeLauncher
                 //await LauncherUpdater.DownloadUpdate(updateInfo.UpdateUrl);
                 needsUpdate = false;
             }
-            else
-            {
-                System.Windows.MessageBox.Show($"Does not Needs Update!", "Update Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
         }
         public async void LaunchPadCheck()
         {
@@ -80,25 +72,6 @@ namespace StarforgeLauncher
             {
                 await LauncherUpdater.DownloadUpdate(updateInfo.UpdateUrl);
                 needsUpdate = false;
-            }
-        }
-        public void Hello_Click(object sender, RoutedEventArgs e)
-        {
-            string updaterExe = System.IO.Path.Combine("LaunchPad", "StarforgeLaunchPad.exe");
-
-            if (File.Exists(updaterExe))
-            {
-                Process.Start(new ProcessStartInfo
-                {
-                    FileName = updaterExe,
-                    UseShellExecute = true
-                });
-
-                System.Windows.Application.Current.Shutdown(); // Exit current app
-            }
-            else
-            {
-                System.Windows.MessageBox.Show($"Updater executable not found. Path: {updaterExe}", "Update Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
