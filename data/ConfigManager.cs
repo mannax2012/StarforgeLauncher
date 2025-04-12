@@ -15,7 +15,6 @@ namespace StarforgeLauncher.data
         public static string discord = "https://discord.gg/vgSPfNMXeN";
         public static string website = "https://swgstarforge.com";
         public static string LaunchPadDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LaunchPad");
-        public static readonly string serverAddress = "172.23.248.241";
         public static int serverPingPort = 44455;
         public static string clientWebhostURL = "http://localhost/website/wordpress/launcher/starforge/client/";
         public static string launcherWebhostURL = "http://localhost/website/wordpress/launcher/starforge/launcher/";
@@ -25,8 +24,7 @@ namespace StarforgeLauncher.data
     {
         public static string launcherVersion = "0.0.1";
         public static string launchPadVersion = "0.0.1";
-        public static string updaterVersion = "0.0.1";
-        public static string InstallDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Starforge");
+        public static string InstallDirectory = Path.Combine(LauncherClientVariables.LaunchPadDirectory, "Starforge");
         public static bool isInstalled = false;
         public static bool isDirectorySet = false;
     }

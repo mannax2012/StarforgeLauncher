@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StarforgeLauncher"
         mc:Ignorable="d"
-        Title="MainWindow" 
+        Title="Starforge Launcher" 
         Height="250" 
         Width="400"
         AllowsTransparency="True"

@@ -30,7 +30,7 @@ namespace StarforgeLauncher.data
     {
         private static readonly string VersionFileUrl = "http://localhost/website/wordpress/launcher/starforge/launcher/version.json";
         private static string LocalLaunchPadVersion = ConfigFileVariables.launchPadVersion;
-        private static string LocalUpdaterVersion = ConfigFileVariables.updaterVersion;
+        private static string LocalUpdaterVersion = ConfigFileVariables.launcherVersion;
         private static string UpdateToVersion = "0";
 
         public static async Task<UpdateEntry> CheckForUpdater()
@@ -94,7 +94,6 @@ namespace StarforgeLauncher.data
 
                     if (new Version(latest.Version) > new Version(LocalLaunchPadVersion))
                     {
-                       // System.Windows.MessageBox.Show($"Update available!\nRemote Version: {latest.Version}\nLocal Version: {LocalLaunchPadVersion}", "Update Available", MessageBoxButton.OK, MessageBoxImage.Information); setStatusText($"Update Found: V{latest.Version}");
                         await DownloadUpdate(latest.UpdateUrl);
                         ConfigFileVariables.launchPadVersion = latest.Version;
                         ConfigManager.SaveConfig();

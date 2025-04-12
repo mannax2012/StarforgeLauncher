@@ -44,7 +44,7 @@ namespace StarforgeLauncher
             if (updateInfo != null)
             {
                 Version remoteVersion = new Version(updateInfo.Version);
-                Version localVersion = new Version(ConfigFileVariables.updaterVersion);
+                Version localVersion = new Version(ConfigFileVariables.launcherVersion);
 
                 needsUpdate = remoteVersion > localVersion;
             }
