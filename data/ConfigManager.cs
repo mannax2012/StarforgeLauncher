@@ -36,7 +36,13 @@ namespace StarforgeLauncher.data
         public static async Task InitializeConfig()
         {
             if (!System.IO.File.Exists(ConfigFilePath))
-            { 
+            {
+                if (!System.IO.File.Exists(LauncherClientVariables.LaunchPadDirectory))
+                {
+                    System.IO.Directory.CreateDirectory(LauncherClientVariables.LaunchPadDirectory);
+                }
+
+                //System.IO.File.Create(ConfigFilePath);
                 SaveConfig();
                 await Task.Delay(1000);
                 LoadConfig();
@@ -49,6 +55,7 @@ namespace StarforgeLauncher.data
 
         public static void SaveConfig()
         {
+
             List<string> lines = new List<string>();
             foreach (var field in typeof(ConfigFileVariables).GetFields(BindingFlags.Static | BindingFlags.Public))
             {

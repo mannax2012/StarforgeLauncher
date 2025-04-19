@@ -26,53 +26,9 @@ namespace StarforgeLauncher.data
         public List<UpdateEntry> Updater { get; set; }
         public List<UpdateEntry> Launcher { get; set; }
     }
-    public static class LauncherUpdater
+    public static class LaunchPadUpdater
     {
-        private static readonly string VersionFileUrl = "http://localhost/website/wordpress/launcher/starforge/launcher/version.json";
-        private static string LocalLaunchPadVersion = ConfigFileVariables.launchPadVersion;
-        private static string LocalUpdaterVersion = ConfigFileVariables.launcherVersion;
-        private static string UpdateToVersion = "0";
-
-        public static async Task<UpdateEntry> CheckForUpdater()
-        {
-            using HttpClient client = new HttpClient();
-            try
-            {
-                string json = await client.GetStringAsync(VersionFileUrl);
-                var updateFile = JsonConvert.DeserializeObject<UpdateFile>(json);
-
-                // Pick which category you want to check (e.g. Launcher)
-                var updates = updateFile?.Updater;
-
-                if (updates != null && updates.Count > 0)
-                {
-                    // Get the latest version — assuming the last one is latest (could also sort if needed)
-                    var latest = updates.Last(); // or .OrderByDescending(v => new Version(v.Version)).First();
-
-                    UpdateToVersion = latest.Version;
-
-                    if (new Version(latest.Version) > new Version(LocalUpdaterVersion))
-                    {
-                        System.Windows.MessageBox.Show(
-                            $"Update available!\nRemote Version: {latest.Version}\nLocal Version: {LocalUpdaterVersion}",
-                            "Update Available", MessageBoxButton.OK, MessageBoxImage.Information
-                        );
-
-                        return latest;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                System.Windows.MessageBox.Show(
-                    $"Update check failed: {ex.Message}",
-                    "Update Error", MessageBoxButton.OK, MessageBoxImage.Error
-                );
-            }
-
-            return null; // No update needed or error occurred
-        }
-
+        private static readonly string VersionFileUrl = "http://launcher.malevolentgaming.net/starforge/version.json";
         public static async Task<UpdateEntry> CheckForLaunchPadUpdate()
         {
             setStatusText("Checking for updates...");
@@ -89,10 +45,9 @@ namespace StarforgeLauncher.data
                 {
                     // Get the latest version — assuming the last one is latest (could also sort if needed)
                     var latest = updates.Last(); // or .OrderByDescending(v => new Version(v.Version)).First();
+                    ConfigManager.LoadConfig();
 
-                    UpdateToVersion = latest.Version;
-
-                    if (new Version(latest.Version) > new Version(LocalLaunchPadVersion))
+                    if (new Version(latest.Version) > new Version(ConfigFileVariables.launchPadVersion))
                     {
                         await DownloadUpdate(latest.UpdateUrl);
                         ConfigFileVariables.launchPadVersion = latest.Version;
@@ -131,31 +86,56 @@ namespace StarforgeLauncher.data
         public static async Task DownloadUpdate(string updateUrl)
         {
             setStatusText("Downloading update...");
-            string tempPath = Path.Combine(Path.GetTempPath(), "Launcher_Update.zip");
-            await Task.Delay(1000); // Delay to ensure file locks are released
-
-            // Initialize the HttpClientHandler with auto redirect enabled
-            HttpClientHandler handler = new HttpClientHandler()
-            {
-                AllowAutoRedirect = true
-            };
-
-            // Create HttpClient instance to download the file
-            using HttpClient client = new HttpClient(handler);
-            using var stream = await client.GetStreamAsync(updateUrl);
-            using var file = new FileStream(tempPath, FileMode.Create);
-            await stream.CopyToAsync(file);
+            string tempPath = Path.Combine(Path.GetTempPath(), "LaunchPad_Update.zip");
             string zipCopy = Path.Combine(Path.GetTempPath(), "launcher_update_copy.zip");
-            File.Copy(tempPath, zipCopy, true);
-            // Extract zip
-            string extractPath = "update";
-            if (Directory.Exists(extractPath)) Directory.Delete(extractPath, true);
-            ZipFile.ExtractToDirectory(zipCopy, Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "update"));
+            string extractPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "update");
 
-            KillProcessByName("StarforgeLaunchPad");
-            await ApplyUpdateAsync();
+            for (int attempt = 1; attempt <= 2; attempt++)
+            {
+                try
+                {
+                    setStatusText($"Downloading update...");
+                    await Task.Delay(1000); // Allow file locks to clear
 
-            
+                    HttpClientHandler handler = new HttpClientHandler { AllowAutoRedirect = true };
+                    using HttpClient client = new HttpClient(handler);
+                    using var stream = await client.GetStreamAsync(updateUrl);
+                    using var file = new FileStream(tempPath, FileMode.Create, FileAccess.Write);
+                    await stream.CopyToAsync(file);
+
+                    File.Copy(tempPath, zipCopy, true);
+
+                    if (Directory.Exists(extractPath)) Directory.Delete(extractPath, true);
+
+                    // Try extracting
+                    ZipFile.ExtractToDirectory(zipCopy, extractPath);
+
+                    // Success, continue update
+                    KillProcessByName("StarforgeLaunchPad");
+                    await ApplyUpdateAsync();
+
+                    return; // Done
+                }
+                catch (InvalidDataException ex) when (ex.Message.Contains("End of Central Directory"))
+                {
+                    Debug.WriteLine($"ZIP extraction failed (attempt {attempt}): {ex.Message}");
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine($"Update attempt {attempt} failed: {ex.Message}");
+                }
+
+                // Small delay between retries
+                await Task.Delay(1500);
+            }
+
+            // Failed after 2 attempts — fallback
+            Debug.WriteLine("Update failed twice. Launching current version.");
+            setStatusText("Update failed. Starting previous version...");
+
+            await Task.Delay(2000);
+            StartLaunchPad("StarforgeLaunchPad.exe");
+            Application.Current.Shutdown();
         }
         public static async Task ApplyUpdateAsync()
         {
@@ -176,8 +156,11 @@ namespace StarforgeLauncher.data
                     string targetPath = Path.Combine(launchPadDir, relativePath);
 
                     string? targetDir = Path.GetDirectoryName(targetPath);
-                    if (!Directory.Exists(targetDir))
+
+                    if (targetDir != null && !Directory.Exists(targetDir))
+                    {
                         Directory.CreateDirectory(targetDir);
+                    }
 
                     File.Copy(file, targetPath, true);
                     Debug.WriteLine($"Copied: {relativePath}");

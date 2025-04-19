@@ -25,40 +25,21 @@ namespace StarforgeLauncher
            
         }
 
-        public void OnAppStart()
+        public async void OnAppStart()
         {
-            ConfigManager.InitializeConfig();
+            await ConfigManager.InitializeConfig();
+
             if (!Directory.Exists(LauncherClientVariables.LaunchPadDirectory))
             {
                 Directory.CreateDirectory(LauncherClientVariables.LaunchPadDirectory);
             }
 
-            UpdaterCheck();
             LaunchPadCheck();
-        }
-        public async void UpdaterCheck()
-        {
-            bool needsUpdate = false;
-            var updateInfo = await LauncherUpdater.CheckForUpdater();
-
-            if (updateInfo != null)
-            {
-                Version remoteVersion = new Version(updateInfo.Version);
-                Version localVersion = new Version(ConfigFileVariables.launcherVersion);
-
-                needsUpdate = remoteVersion > localVersion;
-            }
-
-            if (updateInfo != null && (needsUpdate))
-            { 
-                //await LauncherUpdater.DownloadUpdate(updateInfo.UpdateUrl);
-                needsUpdate = false;
-            }
         }
         public async void LaunchPadCheck()
         {
             bool needsUpdate = false;
-            var updateInfo = await LauncherUpdater.CheckForLaunchPadUpdate();
+            var updateInfo = await LaunchPadUpdater.CheckForLaunchPadUpdate();
 
             if (updateInfo != null)
             {
@@ -70,7 +51,7 @@ namespace StarforgeLauncher
 
             if (updateInfo != null && (needsUpdate))
             {
-                await LauncherUpdater.DownloadUpdate(updateInfo.UpdateUrl);
+                await LaunchPadUpdater.DownloadUpdate(updateInfo.UpdateUrl);
                 needsUpdate = false;
             }
         }
