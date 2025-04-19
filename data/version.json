@@ -2,13 +2,13 @@
   "LaunchPad": [ 
     {
       "version": "0.0.9",
-      "updateUrl": "http://launcher.malevolentgaming.net/starforge/launchPad/StarforgeLaunchPad-0.0.9.zip"
+      "updateUrl": "http://sfclient.malevolentgaming.net/starforge/launchPad/StarforgeLaunchPad-0.0.9.zip"
     }
   ],
   "Launcher": [
     {
       "version": "0.0.3",
-      "updateUrl": "http://launcher.malevolentgaming.net/starforge/launcher/StarforgeLauncher-0.0.3.zip"
+      "updateUrl": "http://sfclient.malevolentgaming.net/starforge/launcher/StarforgeLauncher-0.0.3.zip"
     }
   ]
 }
