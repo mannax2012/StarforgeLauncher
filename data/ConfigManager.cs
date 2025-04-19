@@ -12,12 +12,7 @@ namespace StarforgeLauncher.data
 
     public static class LauncherClientVariables
     {
-        public static string discord = "https://discord.gg/vgSPfNMXeN";
-        public static string website = "https://swgstarforge.com";
         public static string LaunchPadDirectory = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LaunchPad");
-        public static int serverPingPort = 44455;
-        public static string clientWebhostURL = "http://localhost/website/wordpress/launcher/starforge/client/";
-        public static string launcherWebhostURL = "http://localhost/website/wordpress/launcher/starforge/launcher/";
 
     }
     public static class ConfigFileVariables

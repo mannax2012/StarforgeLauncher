@@ -28,7 +28,7 @@ namespace StarforgeLauncher.data
     }
     public static class LaunchPadUpdater
     {
-        private static readonly string VersionFileUrl = "http://launcher.malevolentgaming.net/starforge/version.json";
+        private static readonly string VersionFileUrl = "https://raw.githubusercontent.com/mannax2012/StarforgeLauncher/refs/heads/master/data/version.json";
         public static async Task<UpdateEntry> CheckForLaunchPadUpdate()
         {
             setStatusText("Checking for updates...");
