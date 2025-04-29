@@ -82,7 +82,7 @@ namespace StarforgeLauncher.data
             // Update fields in ConfigFileVariables dynamically
             foreach (var field in typeof(ConfigFileVariables).GetFields(BindingFlags.Static | BindingFlags.Public))
             {
-                if (configDict.TryGetValue(field.Name, out string value))
+                if (configDict.TryGetValue(field.Name, out string? value))
                 {
                     try
                     {

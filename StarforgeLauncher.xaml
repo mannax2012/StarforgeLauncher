@@ -21,7 +21,7 @@
                     AlignmentY="Center"/>
         </Border.Background>
         <Grid>
-            <TextBlock x:Name="StatusTextBlock"  HorizontalAlignment="Center" Margin="0,185,0,0" TextWrapping="Wrap" Text="Status" VerticalAlignment="Top" Width="366" TextAlignment="Center" Height="26" FontSize="18" Foreground="White"/>
+            <TextBlock x:Name="StatusTextBlock"  HorizontalAlignment="Center" Margin="0,185,0,0" TextWrapping="Wrap" Text="Welcome to Starforge" VerticalAlignment="Top" Width="366" TextAlignment="Center" Height="26" FontSize="18" Foreground="White"/>
         </Grid>
     </Border>
 </Window>
