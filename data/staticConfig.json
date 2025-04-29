@@ -1,0 +1,13 @@
+{
+  "LaunchPadConfig": [
+    {
+      "discord": "https://discord.gg/vgSPfNMXeN",
+      "website": "https://swgstarforge.com",
+      "serverAddress": "login.swgstarforge.com",
+      "serverPort": 44453,
+      "serverPingPort": 44455,
+      "clientWebhostURL": "http://sfswg.malevolentgaming.net/client/",
+      "launcherWebhostURL": "http://sfswg.malevolentgaming.net/launcher/"
+    }
+  ]
+}
