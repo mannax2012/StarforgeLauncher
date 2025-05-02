@@ -3,9 +3,9 @@
     {
       "discord": "https://discord.gg/vgSPfNMXeN",
       "website": "https://swgstarforge.com",
-      "serverAddress": "172.23.248.241",
-      "serverPort": 44453,
-      "serverPingPort": 44455,
+      "serverAddress": "login.swgstarforge.com",
+      "serverPort": 44553,
+      "serverPingPort": 44555,
       "clientWebhostURL": "http://sfswg.malevolentgaming.net/client/",
       "launcherWebhostURL": "http://sfswg.malevolentgaming.net/launcher/"
     }
