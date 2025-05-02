@@ -17,8 +17,8 @@ namespace StarforgeLauncher.data
     }
     public static class ConfigFileVariables
     {
-        public static string launcherVersion = "0.0.1";
-        public static string launchPadVersion = "0.0.1";
+        public static string launcherVersion = "0.1.0";
+        public static string launchPadVersion = "0.0.3";
         public static string InstallDirectory = Path.Combine(LauncherClientVariables.LaunchPadDirectory, "Starforge");
         public static bool isInstalled = false;
         public static bool isDirectorySet = false;
@@ -37,7 +37,6 @@ namespace StarforgeLauncher.data
                     System.IO.Directory.CreateDirectory(LauncherClientVariables.LaunchPadDirectory);
                 }
 
-                //System.IO.File.Create(ConfigFilePath);
                 SaveConfig();
                 await Task.Delay(1000);
                 LoadConfig();
