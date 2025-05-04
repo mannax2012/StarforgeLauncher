@@ -3,7 +3,7 @@
     {
       "discord": "https://discord.gg/vgSPfNMXeN",
       "website": "https://swg-starforge.com",
-      "serverAddress": "malevolentgaming.net",
+      "serverAddress": "login.swg-starforge.com",
       "serverPort": 44553,
       "serverPingPort": 44555,
       "clientWebhostURL": "http://sfswg.malevolentgaming.net/client/",
