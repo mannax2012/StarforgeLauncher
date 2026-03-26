@@ -3,25 +3,114 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StarforgeLauncher"
         mc:Ignorable="d"
-        Title="Starforge Launcher" 
-        Height="250" 
-        Width="400"
+        Title="Starforge Launcher"
+        Height="285"
+        Width="430"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
+        ResizeMode="NoResize"
         Icon="data/img/sf_icon.ico"
         Background="Transparent">
-    <Border x:Name="MainBorder" CornerRadius="10" Padding="0">
+    <Border x:Name="MainBorder"
+            CornerRadius="12"
+            Padding="0"
+            MouseDown="DragWindowArea">
         <Border.Background>
             <ImageBrush ImageSource="pack://application:,,,/data/img/launcherBackground.png"
-                    Stretch="Fill"
-                    AlignmentX="Center"
-                    AlignmentY="Center"/>
+                        Stretch="Fill"
+                        AlignmentX="Center"
+                        AlignmentY="Center"/>
         </Border.Background>
-        <Grid>
-            <TextBlock x:Name="StatusTextBlock"  HorizontalAlignment="Center" Margin="0,185,0,0" TextWrapping="Wrap" Text="Welcome to Starforge" VerticalAlignment="Top" Width="366" TextAlignment="Center" Height="26" FontSize="18" Foreground="White"/>
-        </Grid>
+
+        <Border Background="#8A08111B"
+                CornerRadius="12"
+                Padding="16">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0">
+                    <Button Width="28"
+                            Height="28"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Click="Close_Click"
+                            Cursor="Hand"
+                            Background="#9923303D"
+                            BorderBrush="#44FFFFFF"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="Bold"
+                            Content="✕"/>
+                </Grid>
+
+                <StackPanel Grid.Row="2"
+                            Margin="0,0,0,10">
+                    <TextBlock x:Name="StatusTextBlock"
+                               Text="{Binding StatusText}"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               HorizontalAlignment="Stretch"
+                               Foreground="White"
+                               FontSize="17"
+                               FontWeight="SemiBold"
+                               Margin="0,0,0,0"/>
+                </StackPanel>
+
+                <Grid Grid.Row="3"
+                      Margin="0,0,0,8">
+                    <ProgressBar Height="18"
+                                 Minimum="0"
+                                 Maximum="100"
+                                 Value="{Binding ProgressPercentage, Mode=OneWay}"
+                                 IsIndeterminate="{Binding IsIndeterminate}"
+                                 Background="#40364552"
+                                 Foreground="#FF69B7FF"
+                                 BorderBrush="#44FFFFFF"/>
+
+                    <TextBlock Text="{Binding ProgressDisplay}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Foreground="White"
+                               FontSize="11"
+                               FontWeight="Bold"/>
+                </Grid>
+
+                <Grid Grid.Row="4"
+                      Margin="0,0,0,4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Text="{Binding BytesRemainingDisplay}"
+                               Grid.Column="0"
+                               Foreground="#F0F4F8"
+                               FontSize="12"/>
+
+                    <TextBlock Text="{Binding EtaDisplay}"
+                               Grid.Column="1"
+                               Foreground="#F0F4F8"
+                               FontSize="12"
+                               Margin="16,0,0,0"/>
+                </Grid>
+
+                <TextBlock Grid.Row="5"
+                           Text="The launcher will update the LaunchPad, then start it automatically."
+                           TextWrapping="Wrap"
+                           TextAlignment="Center"
+                           Foreground="#D7E4F5"
+                           FontSize="11"
+                           Margin="10,8,10,0"/>
+            </Grid>
+        </Border>
     </Border>
 </Window>

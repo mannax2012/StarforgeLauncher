@@ -1,59 +1,88 @@
-﻿using System.Diagnostics;
-using System.Text;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System;
 using System.IO;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Input;
 using StarforgeLauncher.data;
-using System.Runtime.Serialization;
 
 namespace StarforgeLauncher
-{ 
+{
     public partial class MainWindow : Window
     {
-        public  MainWindow()
+        public MainWindow()
         {
             InitializeComponent();
+            DataContext = DownloadHandler.ItemREF;
             PageHandler.SelfREF = this;
-            OnAppStart();
-           
+            Loaded += MainWindow_Loaded;
         }
 
-        public async void OnAppStart()
+        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            Loaded -= MainWindow_Loaded;
+            await OnAppStartAsync();
+        }
+
+        private async Task OnAppStartAsync()
         {
             await ConfigManager.InitializeConfig();
-
-            if (!Directory.Exists(LauncherClientVariables.LaunchPadDirectory))
-            {
-                Directory.CreateDirectory(LauncherClientVariables.LaunchPadDirectory);
-            }
-
-            LaunchPadCheck();
+            Directory.CreateDirectory(LauncherClientVariables.LaunchPadDirectory);
+            await LaunchPadCheckAsync();
         }
-        public async void LaunchPadCheck()
+
+        private async Task LaunchPadCheckAsync()
         {
-            bool needsUpdate = false;
-            var updateInfo = await LaunchPadUpdater.CheckForLaunchPadUpdate();
+            await LaunchPadUpdater.CheckForLaunchPadUpdate();
+        }
 
-            if (updateInfo != null)
+        public void SetStatusText(string text)
+        {
+            Dispatcher.Invoke(() => DownloadHandler.ItemREF.StatusText = text);
+        }
+
+        public void BeginDownloadProgress(string fileName, long totalBytes)
+        {
+            Dispatcher.Invoke(() => DownloadHandler.ItemREF.BeginDownload(fileName, totalBytes));
+        }
+
+        public void UpdateDownloadProgress(string fileName, long totalBytes, long bytesDownloaded, TimeSpan? eta)
+        {
+            Dispatcher.Invoke(() =>
             {
-                Version remoteVersion = new Version(updateInfo.Version);
-                Version localVersion = new Version(ConfigFileVariables.launchPadVersion);
+                DownloadHandler.ItemREF.FileName = fileName;
+                DownloadHandler.ItemREF.ReportProgress(bytesDownloaded, totalBytes, eta);
+            });
+        }
 
-                needsUpdate = remoteVersion > localVersion;
-            }
-
-            if (updateInfo != null && (needsUpdate))
+        public void SetIndeterminateProgress(string statusText, string fileName)
+        {
+            Dispatcher.Invoke(() =>
             {
-                await LaunchPadUpdater.DownloadUpdate(updateInfo.UpdateUrl);
-                needsUpdate = false;
+                DownloadHandler.ItemREF.StatusText = statusText;
+                DownloadHandler.ItemREF.SetIndeterminateState(fileName);
+            });
+        }
+
+        public void CompleteDownloadProgress(string statusText, string fileName)
+        {
+            Dispatcher.Invoke(() =>
+            {
+                DownloadHandler.ItemREF.StatusText = statusText;
+                DownloadHandler.ItemREF.MarkComplete(fileName);
+            });
+        }
+
+        private void DragWindowArea(object sender, MouseButtonEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                DragMove();
             }
+        }
+
+        private void Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
