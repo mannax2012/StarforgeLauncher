@@ -15,7 +15,7 @@ namespace StarforgeLauncher.data
 
     public static class ConfigFileVariables
     {
-        public static string launcherVersion = "0.1.5";
+        public static string launcherVersion = "0.1.6";
         public static string launchPadVersion = "0.0.0";
         public static string InstallDirectory = Path.Combine(LauncherClientVariables.LaunchPadDirectory, "Starforge-Client");
         public static bool isInstalled = false;
