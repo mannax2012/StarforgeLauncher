@@ -1,13 +1,13 @@
 {
   "LaunchPad": [
     {
-      "version": "1.02.24",
+      "version": "1.02.25",
       "updateUrl": "http://swg-starforge.com/launcher/StarforgeLaunchPad-1.02.25.zip"
     }
   ],
   "Launcher": [
     {
-      "version": "0.1.6",
+      "version": "0.1.7",
       "updateUrl": "http://swg-starforge.com/launcher/StarforgeLauncher-0.1.7.zip"
     }
   ]
