@@ -26,7 +26,7 @@ namespace StarforgeLauncher.data
 
     public static class LaunchPadUpdater
     {
-        private static readonly string VersionFileUrl = "https://raw.githubusercontent.com/mannax2012/StarforgeLauncher/refs/heads/master/data/version.json";
+        private static readonly string VersionFileUrl = "https://raw.githubusercontent.com/mannax2012/StarforgeLauncher/master/data/version.json";
         private const string LaunchPadExeName = "StarforgeLaunchPad.exe";
         public static string LatestLaunchPadVersion { get; private set; } = "0.0.0";
         public static async Task<UpdateEntry?> CheckForLaunchPadUpdate()
@@ -183,9 +183,20 @@ namespace StarforgeLauncher.data
                 return false;
             }
 
-            foreach (string file in Directory.GetFiles(updateDir, "*", SearchOption.AllDirectories))
+            string sourceRoot = ResolveExtractedContentRoot(updateDir);
+
+            CleanupObsoleteArtifacts(
+                sourceRoot,
+                launchPadDir,
+                new[]
+                {
+            "config.cfg",
+            "launcherSession.dat"
+                });
+
+            foreach (string file in Directory.GetFiles(sourceRoot, "*", SearchOption.AllDirectories))
             {
-                string relativePath = Path.GetRelativePath(updateDir, file);
+                string relativePath = Path.GetRelativePath(sourceRoot, file);
                 string targetPath = Path.Combine(launchPadDir, relativePath);
                 string? targetDir = Path.GetDirectoryName(targetPath);
 
@@ -200,7 +211,104 @@ namespace StarforgeLauncher.data
 
             return true;
         }
+        private static string ResolveExtractedContentRoot(string extractPath)
+        {
+            string[] files = Directory.GetFiles(extractPath);
+            string[] directories = Directory.GetDirectories(extractPath);
 
+            if (files.Length == 0 && directories.Length == 1)
+                return directories[0];
+
+            return extractPath;
+        }
+
+        private static void CleanupObsoleteArtifacts(string sourceRoot, string targetRoot, string[] preservedRelativePaths)
+        {
+            if (!Directory.Exists(sourceRoot) || !Directory.Exists(targetRoot))
+                return;
+
+            HashSet<string> incomingRelativePaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (string sourceFile in Directory.GetFiles(sourceRoot, "*", SearchOption.AllDirectories))
+            {
+                string relativePath = NormalizeRelativePath(Path.GetRelativePath(sourceRoot, sourceFile));
+                incomingRelativePaths.Add(relativePath);
+            }
+
+            HashSet<string> preserved = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (string preservedPath in preservedRelativePaths)
+            {
+                if (!string.IsNullOrWhiteSpace(preservedPath))
+                    preserved.Add(NormalizeRelativePath(preservedPath));
+            }
+
+            foreach (string targetFile in Directory.GetFiles(targetRoot, "*", SearchOption.AllDirectories))
+            {
+                string relativePath = NormalizeRelativePath(Path.GetRelativePath(targetRoot, targetFile));
+
+                if (preserved.Contains(relativePath))
+                    continue;
+
+                if (incomingRelativePaths.Contains(relativePath))
+                    continue;
+
+                if (!IsLegacyArtifact(relativePath))
+                    continue;
+
+                try
+                {
+                    File.Delete(targetFile);
+                    Debug.WriteLine("[LaunchPadUpdater] Removed obsolete file: " + relativePath);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("[LaunchPadUpdater] Failed to remove obsolete file '" + relativePath + "': " + ex.Message);
+                }
+            }
+
+            RemoveEmptyDirectories(targetRoot);
+        }
+
+        private static bool IsLegacyArtifact(string relativePath)
+        {
+            string fileName = Path.GetFileName(relativePath);
+
+            return fileName.EndsWith(".dll", StringComparison.OrdinalIgnoreCase)
+                || fileName.EndsWith(".pdb", StringComparison.OrdinalIgnoreCase)
+                || fileName.EndsWith(".xml", StringComparison.OrdinalIgnoreCase)
+                || fileName.EndsWith(".deps.json", StringComparison.OrdinalIgnoreCase)
+                || fileName.EndsWith(".runtimeconfig.json", StringComparison.OrdinalIgnoreCase)
+                || fileName.EndsWith(".exe.config", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static string NormalizeRelativePath(string relativePath)
+        {
+            return relativePath.Replace('\\', '/');
+        }
+
+        private static void RemoveEmptyDirectories(string root)
+        {
+            if (!Directory.Exists(root))
+                return;
+
+            string[] directories = Directory.GetDirectories(root, "*", SearchOption.AllDirectories);
+            Array.Sort(directories, (left, right) => right.Length.CompareTo(left.Length));
+
+            foreach (string directory in directories)
+            {
+                try
+                {
+                    if (Directory.GetFiles(directory).Length == 0 &&
+                        Directory.GetDirectories(directory).Length == 0)
+                    {
+                        Directory.Delete(directory, false);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine("[LaunchPadUpdater] Failed to remove empty directory '" + directory + "': " + ex.Message);
+                }
+            }
+        }
         public static void StartLaunchPad(string launcherExeName)
         {
             string launchPadPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "LaunchPad", launcherExeName);
