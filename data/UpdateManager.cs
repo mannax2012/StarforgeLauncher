@@ -227,11 +227,12 @@ namespace StarforgeLauncher.data
             if (!Directory.Exists(sourceRoot) || !Directory.Exists(targetRoot))
                 return;
 
-            HashSet<string> incomingRelativePaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-            foreach (string sourceFile in Directory.GetFiles(sourceRoot, "*", SearchOption.AllDirectories))
+            // Only track incoming files that live at the ROOT of the extracted update.
+            HashSet<string> incomingRootFiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+            foreach (string sourceFile in Directory.GetFiles(sourceRoot, "*", SearchOption.TopDirectoryOnly))
             {
                 string relativePath = NormalizeRelativePath(Path.GetRelativePath(sourceRoot, sourceFile));
-                incomingRelativePaths.Add(relativePath);
+                incomingRootFiles.Add(relativePath);
             }
 
             HashSet<string> preserved = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -241,14 +242,17 @@ namespace StarforgeLauncher.data
                     preserved.Add(NormalizeRelativePath(preservedPath));
             }
 
-            foreach (string targetFile in Directory.GetFiles(targetRoot, "*", SearchOption.AllDirectories))
+            // IMPORTANT:
+            // Only inspect files directly inside LaunchPad root.
+            // Do NOT recurse into subfolders like LaunchPad\Starforge or LaunchPad\starforge-client.
+            foreach (string targetFile in Directory.GetFiles(targetRoot, "*", SearchOption.TopDirectoryOnly))
             {
                 string relativePath = NormalizeRelativePath(Path.GetRelativePath(targetRoot, targetFile));
 
                 if (preserved.Contains(relativePath))
                     continue;
 
-                if (incomingRelativePaths.Contains(relativePath))
+                if (incomingRootFiles.Contains(relativePath))
                     continue;
 
                 if (!IsLegacyArtifact(relativePath))
@@ -257,15 +261,16 @@ namespace StarforgeLauncher.data
                 try
                 {
                     File.Delete(targetFile);
-                    Debug.WriteLine("[LaunchPadUpdater] Removed obsolete file: " + relativePath);
+                    Debug.WriteLine("[LaunchPadUpdater] Removed obsolete root file: " + relativePath);
                 }
                 catch (Exception ex)
                 {
-                    Debug.WriteLine("[LaunchPadUpdater] Failed to remove obsolete file '" + relativePath + "': " + ex.Message);
+                    Debug.WriteLine("[LaunchPadUpdater] Failed to remove obsolete root file '" + relativePath + "': " + ex.Message);
                 }
             }
 
-            RemoveEmptyDirectories(targetRoot);
+            // Do not remove directories here.
+            // We never want cleanup logic touching folders under LaunchPad.
         }
 
         private static bool IsLegacyArtifact(string relativePath)
@@ -283,31 +288,6 @@ namespace StarforgeLauncher.data
         private static string NormalizeRelativePath(string relativePath)
         {
             return relativePath.Replace('\\', '/');
-        }
-
-        private static void RemoveEmptyDirectories(string root)
-        {
-            if (!Directory.Exists(root))
-                return;
-
-            string[] directories = Directory.GetDirectories(root, "*", SearchOption.AllDirectories);
-            Array.Sort(directories, (left, right) => right.Length.CompareTo(left.Length));
-
-            foreach (string directory in directories)
-            {
-                try
-                {
-                    if (Directory.GetFiles(directory).Length == 0 &&
-                        Directory.GetDirectories(directory).Length == 0)
-                    {
-                        Directory.Delete(directory, false);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("[LaunchPadUpdater] Failed to remove empty directory '" + directory + "': " + ex.Message);
-                }
-            }
         }
         public static void StartLaunchPad(string launcherExeName)
         {
