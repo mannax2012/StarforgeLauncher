@@ -1,6 +1,7 @@
 {
   "LaunchPadVariables": [
     {
+      "profile": "Live",
       "discord": "https://discord.gg/vgSPfNMXeN",
       "website": "https://swg-starforge.com",
       "serverAddress": "login.swg-starforge.com",
@@ -8,6 +9,16 @@
       "serverPingPort": 44555,
       "clientWebhostURL": "http://sfswg.malevolentgaming.net/client/",
       "launcherWebhostURL": "http://sfswg.malevolentgaming.net/launcher/"
+    },
+    {
+      "profile": "TestCenter",
+      "discord": "https://discord.gg/vgSPfNMXeN",
+      "website": "https://swg-starforge.com",
+      "serverAddress": "testcenter.swg-starforge.com",
+      "serverPort": 44453,
+      "serverPingPort": 44455,
+      "clientWebhostURL": "http://swg-starforge.com/launcher/client/",
+      "launcherWebhostURL": "http://swg-starforge.com/launcher/"
     }
   ]
 }
