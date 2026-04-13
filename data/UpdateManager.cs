@@ -168,7 +168,7 @@ namespace StarforgeLauncher.data
         public static async Task<bool> ApplyUpdateAsync(string updateDir)
         {
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
-            string launchPadDir = Path.Combine(baseDir, "LaunchPad");
+            string launchPadDir = LauncherClientVariables.LaunchPadDirectory;
 
             Debug.WriteLine($"Base Directory: {baseDir}");
             SetStatusText($"Applying update v{LatestLaunchPadVersion}.");
@@ -227,6 +227,12 @@ namespace StarforgeLauncher.data
             if (!Directory.Exists(sourceRoot) || !Directory.Exists(targetRoot))
                 return;
 
+            if (!IsSameDirectory(targetRoot, LauncherClientVariables.LaunchPadDirectory))
+            {
+                Debug.WriteLine("[LaunchPadUpdater] Cleanup skipped because target is not the LaunchPad root: " + targetRoot);
+                return;
+            }
+
             // Only track incoming files that live at the ROOT of the extracted update.
             HashSet<string> incomingRootFiles = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
             foreach (string sourceFile in Directory.GetFiles(sourceRoot, "*", SearchOption.TopDirectoryOnly))
@@ -247,6 +253,12 @@ namespace StarforgeLauncher.data
             // Do NOT recurse into subfolders like LaunchPad\Starforge or LaunchPad\starforge-client.
             foreach (string targetFile in Directory.GetFiles(targetRoot, "*", SearchOption.TopDirectoryOnly))
             {
+                if (!IsImmediateChildFile(targetRoot, targetFile))
+                {
+                    Debug.WriteLine("[LaunchPadUpdater] Skipped cleanup outside LaunchPad root: " + targetFile);
+                    continue;
+                }
+
                 string relativePath = NormalizeRelativePath(Path.GetRelativePath(targetRoot, targetFile));
 
                 if (preserved.Contains(relativePath))
@@ -283,6 +295,30 @@ namespace StarforgeLauncher.data
                 || fileName.EndsWith(".deps.json", StringComparison.OrdinalIgnoreCase)
                 || fileName.EndsWith(".runtimeconfig.json", StringComparison.OrdinalIgnoreCase)
                 || fileName.EndsWith(".exe.config", StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static bool IsImmediateChildFile(string parentDirectory, string candidateFile)
+        {
+            string candidateFullPath = Path.GetFullPath(candidateFile);
+            string? candidateParent = Path.GetDirectoryName(candidateFullPath);
+
+            if (string.IsNullOrWhiteSpace(candidateParent))
+                return false;
+
+            return IsSameDirectory(parentDirectory, candidateParent);
+        }
+
+        private static bool IsSameDirectory(string left, string right)
+        {
+            string leftFullPath = TrimDirectorySeparators(Path.GetFullPath(left));
+            string rightFullPath = TrimDirectorySeparators(Path.GetFullPath(right));
+
+            return string.Equals(leftFullPath, rightFullPath, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static string TrimDirectorySeparators(string path)
+        {
+            return path.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
         }
 
         private static string NormalizeRelativePath(string relativePath)
