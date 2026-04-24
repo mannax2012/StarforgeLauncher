@@ -169,6 +169,11 @@ namespace StarforgeLauncher.data
         {
             string baseDir = AppDomain.CurrentDomain.BaseDirectory;
             string launchPadDir = LauncherClientVariables.LaunchPadDirectory;
+            HashSet<string> preservedRelativePaths = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "config.cfg",
+                "launcherSession.dat"
+            };
 
             Debug.WriteLine($"Base Directory: {baseDir}");
             SetStatusText($"Applying update v{LatestLaunchPadVersion}.");
@@ -188,15 +193,19 @@ namespace StarforgeLauncher.data
             CleanupObsoleteArtifacts(
                 sourceRoot,
                 launchPadDir,
-                new[]
-                {
-            "config.cfg",
-            "launcherSession.dat"
-                });
+                preservedRelativePaths.ToArray());
 
             foreach (string file in Directory.GetFiles(sourceRoot, "*", SearchOption.AllDirectories))
             {
                 string relativePath = Path.GetRelativePath(sourceRoot, file);
+                string normalizedRelativePath = NormalizeRelativePath(relativePath);
+
+                if (preservedRelativePaths.Contains(normalizedRelativePath))
+                {
+                    Debug.WriteLine($"Preserved existing file: {normalizedRelativePath}");
+                    continue;
+                }
+
                 string targetPath = Path.Combine(launchPadDir, relativePath);
                 string? targetDir = Path.GetDirectoryName(targetPath);
 
@@ -417,8 +426,10 @@ namespace StarforgeLauncher.data
 
         private static void PersistLaunchPadVersion(string version)
         {
-            ConfigFileVariables.launchPadVersion = version;
-            ConfigManager.SaveConfig();
+            ConfigManager.SaveConfig(existingConfig =>
+            {
+                existingConfig[nameof(ConfigFileVariables.launchPadVersion)] = version;
+            });
             Debug.WriteLine($"Saved LaunchPad version {LatestLaunchPadVersion} after successful update: {version}");
         }
 

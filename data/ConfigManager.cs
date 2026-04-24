@@ -15,7 +15,7 @@ namespace StarforgeLauncher.data
 
     public static class ConfigFileVariables
     {
-        public static string launcherVersion = "0.1.9";
+        public static string launcherVersion = "0.1.11";
         public static string launchPadVersion = "0.0.0";
         public static string InstallDirectory = Path.Combine(LauncherClientVariables.LaunchPadDirectory, "Starforge-Client");
         public static bool isInstalled = false;
@@ -53,15 +53,17 @@ namespace StarforgeLauncher.data
 
             if (IsBundledVersionGreater(bundledLauncherVersion, configLauncherVersion))
             {
-                ConfigFileVariables.launcherVersion = bundledLauncherVersion;
-                SaveConfig();
+                SaveConfig(existingConfig =>
+                {
+                    existingConfig[nameof(ConfigFileVariables.launcherVersion)] = bundledLauncherVersion;
+                });
                 Debug.WriteLine("launcherVersion updated to: " + bundledLauncherVersion);
             }
 
             ConfigFileVariables.isDirectorySet = !string.IsNullOrWhiteSpace(ConfigFileVariables.InstallDirectory);
         }
 
-        private static string ReadConfigValue(string key)
+        private static string? ReadConfigValue(string key)
         {
             if (!File.Exists(ConfigFilePath))
                 return null;
@@ -84,8 +86,10 @@ namespace StarforgeLauncher.data
 
         private static bool IsBundledVersionGreater(string bundledVersion, string configVersion)
         {
-            if (Version.TryParse(bundledVersion, out Version bundled) &&
-                Version.TryParse(configVersion, out Version config))
+            if (Version.TryParse(bundledVersion, out Version? bundled) &&
+                Version.TryParse(configVersion, out Version? config) &&
+                bundled is not null &&
+                config is not null)
             {
                 return bundled > config;
             }
@@ -97,15 +101,40 @@ namespace StarforgeLauncher.data
         {
             Directory.CreateDirectory(LauncherClientVariables.LaunchPadDirectory);
 
+            Dictionary<string, string> existingConfig = ReadConfigValues();
             List<string> lines = new List<string>();
             foreach (var field in typeof(ConfigFileVariables).GetFields(BindingFlags.Static | BindingFlags.Public))
             {
                 string name = field.Name;
                 string value = field.GetValue(null)?.ToString() ?? "";
                 lines.Add($"{name}={value}");
+                existingConfig.Remove(name);
+            }
+
+            foreach (var entry in existingConfig)
+            {
+                lines.Add($"{entry.Key}={entry.Value}");
             }
 
             File.WriteAllLines(ConfigFilePath, lines);
+        }
+
+        public static void SaveConfig(Action<Dictionary<string, string>> updateExistingConfig)
+        {
+            Directory.CreateDirectory(LauncherClientVariables.LaunchPadDirectory);
+
+            Dictionary<string, string> configValues = ReadConfigValues();
+            foreach (var field in typeof(ConfigFileVariables).GetFields(BindingFlags.Static | BindingFlags.Public))
+            {
+                if (!configValues.ContainsKey(field.Name))
+                {
+                    configValues[field.Name] = field.GetValue(null)?.ToString() ?? "";
+                }
+            }
+
+            updateExistingConfig(configValues);
+            ApplyConfigValues(configValues);
+            WriteConfigValues(configValues);
         }
 
         public static void LoadConfig()
@@ -113,10 +142,17 @@ namespace StarforgeLauncher.data
             if (!File.Exists(ConfigFilePath))
                 return;
 
-            string[] configLines = File.ReadAllLines(ConfigFilePath);
+            ApplyConfigValues(ReadConfigValues());
+        }
+
+        private static Dictionary<string, string> ReadConfigValues()
+        {
             Dictionary<string, string> configDict = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 
-            foreach (string line in configLines)
+            if (!File.Exists(ConfigFilePath))
+                return configDict;
+
+            foreach (string line in File.ReadAllLines(ConfigFilePath))
             {
                 if (string.IsNullOrWhiteSpace(line) || !line.Contains("="))
                     continue;
@@ -127,9 +163,14 @@ namespace StarforgeLauncher.data
                 configDict[key] = value;
             }
 
+            return configDict;
+        }
+
+        private static void ApplyConfigValues(Dictionary<string, string> configDict)
+        {
             foreach (var field in typeof(ConfigFileVariables).GetFields(BindingFlags.Static | BindingFlags.Public))
             {
-                if (!configDict.TryGetValue(field.Name, out string value))
+                if (!configDict.TryGetValue(field.Name, out string? value))
                     continue;
 
                 try
@@ -148,6 +189,27 @@ namespace StarforgeLauncher.data
                     MessageBox.Show($"Error loading {field.Name}: {ex.Message}", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
+        }
+
+        private static void WriteConfigValues(Dictionary<string, string> configValues)
+        {
+            List<string> lines = new List<string>();
+            foreach (var field in typeof(ConfigFileVariables).GetFields(BindingFlags.Static | BindingFlags.Public))
+            {
+                string name = field.Name;
+                if (configValues.TryGetValue(name, out string? value))
+                {
+                    lines.Add($"{name}={value}");
+                    configValues.Remove(name);
+                }
+            }
+
+            foreach (var entry in configValues)
+            {
+                lines.Add($"{entry.Key}={entry.Value}");
+            }
+
+            File.WriteAllLines(ConfigFilePath, lines);
         }
     }
 }
