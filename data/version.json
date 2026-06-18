@@ -1,14 +1,24 @@
 {
   "LaunchPad": [
     {
-      "version": "1.03.24",
-      "updateUrl": "http://swg-starforge.com/launcher/StarforgeLaunchPad-1.03.24.zip"
+      "version": "1.03.25",
+      "updateUrl": "http://swg-starforge.com/launcher/StarforgeLaunchPad-1.03.25.zip"
     }
   ],
   "Launcher": [
     {
       "version": "0.1.11",
       "updateUrl": "http://swg-starforge.com/launcher/StarforgeLauncher-0.1.11.zip"
+    }
+  ],
+  "ClientWebhosts": [
+    {
+      "profile": "Live",
+      "clientWebhostURL": "http://sfswg.malevolentgaming.net/client/"
+    },
+    {
+      "profile": "TestCenter",
+      "clientWebhostURL": "http://sfswg.malevolentgaming.net/client-tc/"
     }
   ]
 }
